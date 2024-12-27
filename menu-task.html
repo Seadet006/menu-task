@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript Menu</title>
+    <style>
+        #menu ul li{
+            display: inline-block;
+            width: 150px;
+            padding-left: 5px 10px;
+            background-color: lightgreen;
+            color: black;
+            text-decoration: center;
+        }
+        #arrow{
+            margin-left: 40px;
+        }
+        #arrow div{
+            float: left;
+            width: 150px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <p>
+        <a href="#">Activate Edit Mode</a>
+    </p>
+    <p>
+        <label>Add New Menu</label>
+        <input type="text" id="newMenuValue">
+        <input type="submit" value="Add" onclick="addMenu()">
+    </p>
+    
+</div>
+<div id="menu"></div>
+
+
+
+
+<script type="text/javascript">
+   let arrMenu = ['Menu 1', 'Menu 2','Menu 3'];
+   
+   function getMenu(){
+    let menuHtml = '<ul>';
+    let arrowHtml = '<div id="arrow" >'; 
+         
+    for (let i=0; i<arrMenu.length; i++) {
+      menuHtml += '<li>' + arrMenu[i] + '</li';
+
+        if (i == 0) {
+            arrowHtml +='<div><a href="#">-></a></div>';
+        } else if(i == arrMenu.length-1) {
+            arrowHtml += '<div><a href="#"><-</a></div>';
+        } else {
+            arrowHtml += '<div><a href="#"><-</a> | <a href="#">-></a></div>';
+        }
+    }
+    menuHtml +='</ul>';
+    arrowHtml += '/div';
+
+    return menuHtml + arrowHtml ;
+
+   }
+
+   function showMenu() {
+    let menu = getMenu();
+    document.getElementById('menu').innerHTML = menu;
+   }
+
+   function addMenu() {
+    let newMenu = document.getElementById('newMenuValue');
+    arrMenu.push(newMenu.value);
+    showMenu();
+    newMenu.value = '';
+   }
+
+   showMenu();
+
+</script> 
+</body>
+</html>
